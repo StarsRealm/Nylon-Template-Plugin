@@ -1,4 +1,4 @@
-package io.papermc.paperweight.testplugin;
+package com.starsrealm.testplugin;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;

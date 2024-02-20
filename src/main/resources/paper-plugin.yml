@@ -1,6 +1,6 @@
 name: $name
 version: $version
-main: io.papermc.paperweight.testplugin.TestPlugin
+main: com.starsrealm.testplugin.TestPlugin
 description: $description
 load: STARTUP
 authors:

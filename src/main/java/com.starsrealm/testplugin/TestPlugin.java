@@ -1,4 +1,4 @@
-package io.papermc.paperweight.testplugin;
+package com.starsrealm.testplugin;
 
 import com.destroystokyo.paper.brigadier.BukkitBrigadierCommandSource;
 import com.destroystokyo.paper.event.brigadier.CommandRegisteredEvent;
