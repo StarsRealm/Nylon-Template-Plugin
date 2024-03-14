@@ -23,5 +23,5 @@ jobs:
       - name: Build
         run: ./gradlew build
         env:
-          USERNAME: ${{ secrets.ALY_USER }}
-          TOKEN: ${{ secrets.ALY_PASSWORD }}
+          ALY_USER: ${{ secrets.ALY_USER }}
+          ALY_PASSWORD: ${{ secrets.ALY_PASSWORD }}
