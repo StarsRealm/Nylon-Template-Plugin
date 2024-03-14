@@ -2,6 +2,7 @@ plugins {
   `java-library`
   id("io.papermc.paperweight.userdev") version "1.5.11"
   id("xyz.jpenilla.run-paper") version "2.2.3"
+  id("maven-publish")
 }
 
 group = "com.starsrealm"
@@ -15,16 +16,25 @@ java {
 
 repositories {
   maven {
-    url = uri("https://maven.pkg.github.com/StarsRealm/Packages")
+    name = "AliYun-Release"
+    url = uri("https://packages.aliyun.com/maven/repository/2421751-release-ZmwRAc/")
     credentials {
-      username = findProperty("gpr.user") as? String ?: System.getenv("USERNAME")
-      password = findProperty("gpr.key") as? String ?: System.getenv("TOKEN")
+      username = project.findProperty("aliyun.package.user") as String? ?: System.getenv("ALY_USER")
+      password = project.findProperty("aliyun.package.password") as String? ?: System.getenv("ALY_PASSWORD")
+    }
+  }
+  maven {
+    name = "AliYun-Snapshot"
+    url = uri("https://packages.aliyun.com/maven/repository/2421751-snapshot-i7Aufp/")
+    credentials {
+      username = project.findProperty("aliyun.package.user") as String? ?: System.getenv("ALY_USER")
+      password = project.findProperty("aliyun.package.password") as String? ?: System.getenv("ALY_PASSWORD")
     }
   }
 }
 
 dependencies {
-  paperweight.devBundle("com.starsrealm.nylon", "1.20.4-R0.1-SNAPSHOT")
+  paperweight.devBundle("com.starsrealm.nylon", "1.20.4-R0.2-SNAPSHOT")
 }
 
 tasks {
@@ -54,4 +64,31 @@ tasks {
     }
   }
 
+}
+
+publishing {
+  repositories {
+    maven {
+      name = "AliYun-Release"
+      url = uri("https://packages.aliyun.com/maven/repository/2421751-release-ZmwRAc/")
+      credentials {
+        username = project.findProperty("aliyun.package.user") as String? ?: System.getenv("ALY_USER")
+        password = project.findProperty("aliyun.package.password") as String? ?: System.getenv("ALY_PASSWORD")
+      }
+    }
+    maven {
+      name = "AliYun-Snapshot"
+      url = uri("https://packages.aliyun.com/maven/repository/2421751-snapshot-i7Aufp/")
+      credentials {
+        username = project.findProperty("aliyun.package.user") as String? ?: System.getenv("ALY_USER")
+        password = project.findProperty("aliyun.package.password") as String? ?: System.getenv("ALY_PASSWORD")
+      }
+    }
+  }
+  publications {
+    create("gpr", MavenPublication::class.java) {
+      from(components.getByName("java"))
+      groupId = project.group.toString()
+    }
+  }
 }
