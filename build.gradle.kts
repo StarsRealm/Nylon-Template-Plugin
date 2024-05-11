@@ -1,18 +1,17 @@
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.5.11"
-  id("xyz.jpenilla.run-paper") version "2.2.3"
+  id("io.papermc.paperweight.userdev") version "1.6.3"
+  id("xyz.jpenilla.run-paper") version "2.2.4"
   id("maven-publish")
 }
 
-group = "com.starsrealm"
+group = "com.starsrealm.testplugin"
 version = "1.0.0-SNAPSHOT"
 description = "Template plugin for Nylon Dev"
 
 java {
-  toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+  toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
-
 
 repositories {
   maven {
@@ -34,18 +33,12 @@ repositories {
 }
 
 dependencies {
-  paperweight.devBundle("com.starsrealm.nylon", "1.20.4-R0.2-SNAPSHOT")
+  paperweight.devBundle("com.starsrealm.nylon", "1.20.6-R0.3-STARSREALM-SNAPSHOT")
 }
 
 tasks {
-  assemble {
-    dependsOn(reobfJar)
-  }
-
   compileJava {
-    options.encoding = Charsets.UTF_8.name()
-
-    options.release.set(17)
+    options.release = 21
   }
   javadoc {
     options.encoding = Charsets.UTF_8.name()
@@ -56,14 +49,13 @@ tasks {
       "name" to project.name,
       "version" to project.version,
       "description" to project.description,
-      "apiVersion" to "1.20"
+      "apiVersion" to "1.20.6"
     )
     inputs.properties(props)
     filesMatching("paper-plugin.yml") {
       expand(props)
     }
   }
-
 }
 
 publishing {
