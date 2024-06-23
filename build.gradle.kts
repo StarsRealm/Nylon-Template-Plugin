@@ -1,6 +1,6 @@
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.6.3"
+  id("io.papermc.paperweight.userdev") version "1.7.1"
   id("xyz.jpenilla.run-paper") version "2.2.4"
   id("maven-publish")
 }
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-  paperweight.devBundle("com.starsrealm.nylon", "1.20.6-R0.3-STARSREALM-SNAPSHOT")
+  paperweight.devBundle("com.starsrealm.nylon", "1.21-R0.0.1-STARSREALM-SNAPSHOT")
 }
 
 tasks {
@@ -49,7 +49,7 @@ tasks {
       "name" to project.name,
       "version" to project.version,
       "description" to project.description,
-      "apiVersion" to "1.20.6"
+      "apiVersion" to "1.21"
     )
     inputs.properties(props)
     filesMatching("paper-plugin.yml") {
